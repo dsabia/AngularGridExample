@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html ng-app="myApp">
+<html ng-app="gridApp">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
@@ -20,41 +20,24 @@
     <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0-rc2/angular-material.min.js"></script>
 
     
-    <script src="gridjs.js" ></script>
     <script src="grid.js" ></script>
 
 </head>
-<body ng-controller="myCtrl">
+<body ng-controller="gridController">
 
-    <p ng-click="showAlert();">{{firstName + ' ' + lastName}}</p>
+    <p ng-click="showAlert(name)">{{name + ' ' + icon}}</p>
     
-    <div id="grid2">
-        <div ng-repeat="block in blocks" class="block seventy">
+    <div id="grid">
+        <div ng-repeat="block in blocks" class="block seventy" >
             
-            <div class="blockInternal tooltip" ng-click="showPrompt()">
-                {{block.description}}
-                <div class="tooltiptext">{{block.tooltip}}</div>
+            <div class="blockInternal tooltip" >
+                <span ng-click="showPrompt(block)">{{block.value == null ? block.id : block.value}}</span>
+                <div class="tooltiptext">{{block.tooltip}}<br/>{{block.value}}</div>
             </div>
             
         </div>
     </div>
     
-    <div id="grid" style="visibility:hidden;"></div>
-    
-
-    
-    <script>
-        grid('blocks', 70, 70, 490, 490);
-        /*
-        $(document).ready(function(){
-          grid('blocks', 70, 70, 490, 490);
-        });
-        */
-    </script>
-    
-    
-    <md-dialog aria-label="Mango (Fruit)"  ng-cloak>
-    </md-dialog>
 </body>
 
 

@@ -1,13 +1,8 @@
-
-#grid{
-    top: 40px;
-    position: absolute;
-    width: 490px;
-    height: 490px;
-    border: 1px solid blue;
+body{
+    font-family: monospace;
 }
 
-#grid2{
+#grid{
     top: 30px;
     position: absolute;
     width: 490px;

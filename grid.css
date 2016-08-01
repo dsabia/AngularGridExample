@@ -7,6 +7,19 @@
     border: 1px solid blue;
 }
 
+#grid2{
+    top: 30px;
+    position: absolute;
+    width: 490px;
+    height: 490px;
+    border: 1px solid blue;
+}
+
+.seventy{
+    width: 70px;
+    height: 70px;
+}
+
 .block{
     display: block;
     position: relative;

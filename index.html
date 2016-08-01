@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html ng-app="myApp">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
+    
+    <title>Node/Angular Grid App</title>
+    
+    <link rel="stylesheet" href="grid.css"></link>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js" ></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
+    
+    <script src="gridjs.js" ></script>
+    <script src="grid.js" ></script>
+    
+    
+
+</head>
+<body ng-controller="myCtrl">
+
+    <p>{{firstName + ' ' + lastName}}</p>
+    
+	<div id="grid" ></div>
+
+    
+    <script>
+        grid('blocks', 70, 70, 490, 490);
+        /*
+        $(document).ready(function(){
+          grid('blocks', 70, 70, 490, 490);
+        });
+        */
+    </script>
+</body>
+
+
+</html>

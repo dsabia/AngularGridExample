@@ -1,6 +1,6 @@
-var app = angular.module("gridApp", ['ngMaterial','ngMessages']); 
+var app = angular.module("gridApp", ['ngMaterial','ngMessages', 'gridService']); 
 
-app.controller("gridController", function ($scope, $mdDialog, $log) {
+app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridREST ) {
     
     $scope.name = "Daniele";
     $scope.icon = ":-)";
@@ -11,6 +11,16 @@ app.controller("gridController", function ($scope, $mdDialog, $log) {
             $scope.blocks.push(getBlockInfo(i,j));
         }
     };
+    
+    $log.info('GridREST: ' + GridREST);
+    
+    GridREST.get().success(function(data) {
+        //$scope.blocks = data;
+        $scope.icon = data.length;
+    }).finally(function(){
+        $log.info('Finally called');
+        $scope.icon += "!!!";
+    });
 
     $scope.showAlert = function(aName) {
       alert = $mdDialog.alert()
@@ -31,7 +41,7 @@ app.controller("gridController", function ($scope, $mdDialog, $log) {
         // Appending dialog to document.body to cover sidenav in docs app
         if(block.enabled){
             confirm = $mdDialog.prompt()
-              .title("Who is" + block.id + "?")
+              .title("Who is " + block.id + "?")
               .textContent(block.description)
               .placeholder("What's the value for " + block.id + "?")
               .ariaLabel(block.id)
@@ -43,7 +53,7 @@ app.controller("gridController", function ($scope, $mdDialog, $log) {
                 .then(function(result) {
                         block.value = result;
                     }, function() {
-                        block.value = "No value set!!";
+                        block.value = null;
                     })
                 .finally(function(){
                             confirm = undefined;

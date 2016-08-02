@@ -1,5 +1,5 @@
 module.exports = {
-    remoteUrl : 'mongodb://node:nodeuser@mongo.onmodulus.net:27017/uwO3mypu',
+    remoteUrl : process.env.OPENSHIFT_MONGODB_DB_URL+'/sampledb',
     localUrl: 'mongodb://localhost/test'
 };
 

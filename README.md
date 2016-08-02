@@ -8,16 +8,14 @@ Experiment application based on :
 ###Configuration 
 
 ##### Travis-CI
-
-'''
+```
 npm install
-'''
+```
 
 ##### Test application
-
-'''
+```
 node server.js
-'''
+```
 once started mongoDB
 
 ##### Local notes

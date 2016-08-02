@@ -1,11 +1,27 @@
-# Blue Grid
+# Blue Grid Application
 
-Based on :
-1. Angular.js
-2. Node.js
-3. MongoDB
+Experiment application based on :
+  * Angular.js
+  * Node.js
+  * MongoDB
 
-Local path for starting mongoDB:
+###Configuration 
+
+##### Travis-CI
+
+'''
+npm install
+'''
+
+##### Test application
+
+'''
+node server.js
+'''
+once started mongoDB
+
+##### Local notes
+for starting mongoDB:
 ``` 
 cd C:\Program Files\MongoDB\Server\3.2\bin 
 mongod --dbpath c:/DB/mongo/test

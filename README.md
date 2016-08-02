@@ -1,4 +1,9 @@
-# AngularGridExample
+# Blue Grid
+
+Based on :
+1. Angular.js
+2. Node.js
+3. MongoDB
 
 Local path for starting mongoDB:
 ``` 

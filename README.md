@@ -5,6 +5,9 @@ Experiment application based on :
   * Node.js
   * MongoDB
 
+
+[![Build Status](https://travis-ci.org/dsabia/AngularJs-BlueGrid.svg?branch=master)](https://travis-ci.org/dsabia/AngularJs-BlueGrid)
+
 ###Configuration 
 
 ##### Travis-CI

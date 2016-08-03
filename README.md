@@ -1,12 +1,14 @@
 # Blue Grid Application
 
-Experiment application based on :
-  * Angular.js
-  * Node.js
-  * MongoDB
-
+Preview on https://blue-grid.herokuapp.com/
 
 [![Build Status](https://travis-ci.org/dsabia/AngularJs-BlueGrid.svg?branch=master)](https://travis-ci.org/dsabia/AngularJs-BlueGrid)
+
+Experiment MEAN application :
+  * MongoDB _(only development)_
+  * Express.js
+  * Angular.js
+  * Node.js
 
 ###Configuration 
 

@@ -13,7 +13,8 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
     };
     
     $log.info('GridREST: ' + GridREST);
-    
+  
+    /*
     GridREST.get().success(function(data) {
         //$scope.blocks = data;
         $scope.icon = data.length;
@@ -21,7 +22,8 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
         $log.info('Finally called');
         $scope.icon += "!!!";
     });
-
+    */
+    
     $scope.showAlert = function(aName) {
       alert = $mdDialog.alert()
         .title('Attention, ' + aName)

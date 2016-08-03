@@ -4,11 +4,6 @@ var app = express(); 						// create our app w/ express
 var mongoose = require('mongoose'); 				// mongoose for mongodb
 
 var port = process.env.PORT || 8080; 
-/*
-//deprecated
-var server_port = process.env.OPENSHIFT_NODEJS_PORT || 8080
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1'
-*/
 
 var database = require('./config/database'); 			// load the database config
 var morgan = require('morgan');
@@ -30,12 +25,5 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 require('./app/routes.js')(app);
 
 // listen (start app with node server.js) ======================================
-
-
 app.listen(port);
-/*
-app.listen(server_port, server_ip_address, function(){
-  console.log("Listening on " + server_ip_address + ", server_port " + server_port)
-});
-*/
-console.log("App listening on port " + server_port);
+console.log("App listening on port " + port);

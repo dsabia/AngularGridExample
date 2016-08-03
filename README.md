@@ -23,7 +23,7 @@ node server.js
 ```
 once started mongoDB
 
-##### Local notes
+##### Local notes _(windows only)_
 for starting mongoDB:
 ``` 
 cd C:\Program Files\MongoDB\Server\3.2\bin 

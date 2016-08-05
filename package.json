@@ -2,8 +2,10 @@
   "name": "blue-grid",
   "version": "0.0.1",
   "description": "Blue grid game.",
-  "main": "server.js",
   "author": "Daniele :-)",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "body-parser": "^1.4.3",
     "express": "^4.13.4",

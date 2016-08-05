@@ -5,15 +5,13 @@ angular.module('gridService', [])
 	.factory('GridREST', ['$http',function($http) {
 		return {
 			get : function() {
-				return $http.get('/api/todos');
-			}
-            /*,
-			create : function(todoData) {
-				return $http.post('/api/todos', todoData);
+				return $http.get('/api/grid');
+			},
+			create : function() {
+				return $http.post('/api/grid/');
 			},
 			delete : function(id) {
-				return $http.delete('/api/todos/' + id);
+				return $http.delete('/api/grid/' + id);
 			}
-            */
 		}
 	}]);

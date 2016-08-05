@@ -1,7 +1,8 @@
-var GridDB = require('./models/model');
+var Block = require('./models/Block');
+var Generator = require('./factory/Generator');
 
 function getBlocks(res) {
-    GridDB.find(function (err, todos) {
+    Block.find(function (err, todos) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
@@ -17,31 +18,20 @@ module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
     // get all todos
-    app.get('/api/todos', function (req, res) {
+    app.get('/api/grid', function (req, res) {
         // use mongoose to get all todos in the database
         getBlocks(res);
     });
 
     // create todo and send back all todos after creation
-    app.post('/api/todos', function (req, res) {
-
-        // create a todo, information comes from AJAX request from Angular
-        GridDB.create({
-            text: req.body.text,
-            done: false
-        }, function (err, todo) {
-            if (err)
-                res.send(err);
-
-            // get and return all the todos after you create another
-            getBlocks(res);
-        });
-
+    app.post('/api/grid', function (req, res) {
+        console.info('POST CALLED')
+        Generator();
     });
 
     // delete a todo
-    app.delete('/api/todos/:todo_id', function (req, res) {
-        GridDB.remove({
+    app.delete('/api/grid/:todo_id', function (req, res) {
+        Block.remove({
             _id: req.params.todo_id
         }, function (err, todo) {
             if (err)

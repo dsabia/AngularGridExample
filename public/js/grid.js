@@ -4,6 +4,24 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
     
     $scope.name = "Daniele";
     $scope.icon = ":-)";
+
+ 
+    var block = getBlockInfo(2,3);
+    GridREST.create(block).success(function(data) {
+        //$scope.blocks = data;
+        $scope.icon = data.length;
+    }).finally(function(){
+        $log.info('Create called');
+        $scope.icon += "!!!";
+    });
+    
+    GridREST.get().success(function(data) {
+        //$scope.blocks = data;
+        $scope.icon = data.length;
+    }).finally(function(){
+        $log.info('Get called');
+        $scope.icon += "!!!";
+    });
     
     $scope.blocks = [];
     for(var i = 0; i < 7; i++){
@@ -14,15 +32,6 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
     
     $log.info('GridREST: ' + GridREST);
   
-    /*
-    GridREST.get().success(function(data) {
-        //$scope.blocks = data;
-        $scope.icon = data.length;
-    }).finally(function(){
-        $log.info('Finally called');
-        $scope.icon += "!!!";
-    });
-    */
     
     $scope.showAlert = function(aName) {
       alert = $mdDialog.alert()

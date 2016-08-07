@@ -1,7 +1,5 @@
 # Blue Grid Application
 
-Preview on https://blue-grid.herokuapp.com/
-
 [![Build Status](https://travis-ci.org/dsabia/AngularJs-BlueGrid.svg?branch=master)](https://travis-ci.org/dsabia/AngularJs-BlueGrid)
 
 Experiment MEAN application :

@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/dsabia/AngularJs-BlueGrid.svg?branch=master)](https://travis-ci.org/dsabia/AngularJs-BlueGrid)
 
 Experiment MEAN application :
-  * MongoDB _(only development)_
+  * MongoDB
   * Express.js
   * Angular.js
   * Node.js

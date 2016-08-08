@@ -5,7 +5,9 @@ var BlockSchema = new mongoose.Schema({
     description: String,
     tooltip: String,
     value: String,
-    enabled: Boolean
+    enabled: Boolean,
+    i: Number,
+    j: Number
 });
 
 var Block = mongoose.model('Block', BlockSchema);

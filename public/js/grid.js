@@ -6,6 +6,7 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
     $scope.icon = ":-)";
 
  
+    /*
     var block = getBlockInfo(2,3);
     GridREST.create(block).success(function(data) {
         //$scope.blocks = data;
@@ -14,21 +15,32 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
         $log.info('Create called');
         $scope.icon += "!!!";
     });
+    */
+    
+    $scope.blocks = [];
     
     GridREST.get().success(function(data) {
         //$scope.blocks = data;
-        $scope.icon = data.length;
+        
+        for(index in data){
+            var dbBlock = data[index];
+            var blockRefined = refine(dbBlock);
+            $scope.blocks.push(blockRefined);
+        }
+        $scope.icon = "Objects loaded: " + data.length;
     }).finally(function(){
         $log.info('Get called');
         $scope.icon += "!!!";
     });
     
-    $scope.blocks = [];
+    
+    /*
     for(var i = 0; i < 7; i++){
         for(var j = 0; j < 7; j++){
             $scope.blocks.push(getBlockInfo(i,j));
         }
     };
+    */
     
     $log.info('GridREST: ' + GridREST);
   
@@ -77,7 +89,16 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
 
 });
 
-// business and model
+function refine(dbBlock){
+    var id = getId(dbBlock.id);
+    dbBlock.id = id;
+    
+    return dbBlock;
+}
+
+// temporary business and model
+
+
 
 function getBlockInfo(i,j){
     var block = new Object;

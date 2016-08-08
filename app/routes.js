@@ -2,14 +2,14 @@ var Block = require('./models/Block');
 var Generator = require('./factory/Generator');
 
 function getBlocks(res) {
-    Block.find(function (err, todos) {
+    Block.find(function (err, blocks) {
 
         // if there is an error retrieving, send the error. nothing after res.send(err) will execute
         if (err) {
             res.send(err);
         }
 
-        res.json(todos); // return all todos in JSON format
+        res.json(blocks); // return all blocks in JSON format
     });
 }
 ;
@@ -17,22 +17,22 @@ function getBlocks(res) {
 module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
-    // get all todos
+    // get all blocks
     app.get('/api/grid', function (req, res) {
         // use mongoose to get all todos in the database
         getBlocks(res);
     });
 
-    // create todo and send back all todos after creation
+    // create all blocks and send them back after creation
     app.post('/api/grid', function (req, res) {
         console.info('POST CALLED')
-        Generator();
+        //do nothing 
     });
 
-    // delete a todo
-    app.delete('/api/grid/:todo_id', function (req, res) {
+    // delete a block
+    app.delete('/api/grid/:block_id', function (req, res) {
         Block.remove({
-            _id: req.params.todo_id
+            _id: req.params.block_id
         }, function (err, todo) {
             if (err)
                 res.send(err);

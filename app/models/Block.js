@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 
 var BlockSchema = new mongoose.Schema({ 
-    id: String,
+    _id: Number,
+    title: String,
     description: String,
     tooltip: String,
     value: String,

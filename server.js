@@ -24,10 +24,11 @@ app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-M
 // routes ======================================================================
 require('./app/routes.js')(app);
 
+// init: generate database ======================================================================
+var Generator = require('./app/factory/Generator');
+Generator();
+
 // listen (start app with node server.js) ======================================
 app.listen(port);
 console.log("App listening on port " + port);
 
-// generate app
-var Generator = require('./app/factory/Generator');
-Generator();

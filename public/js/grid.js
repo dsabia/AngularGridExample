@@ -1,49 +1,13 @@
 var app = angular.module("gridApp", ['ngMaterial','ngMessages', 'gridService']); 
 
-app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridREST ) {
+app.controller("gridController", function ($scope, $mdDialog, $http, GridREST ) {
     
     $scope.name = "Daniele";
     $scope.icon = ":-)";
 
- 
-    /*
-    var block = getBlockInfo(2,3);
-    GridREST.create(block).success(function(data) {
-        //$scope.blocks = data;
-        $scope.icon = data.length;
-    }).finally(function(){
-        $log.info('Create called');
-        $scope.icon += "!!!";
-    });
-    */
-    
     $scope.blocks = [];
     
-    GridREST.get().success(function(data) {
-        //$scope.blocks = data;
-        
-        for(index in data){
-            var dbBlock = data[index];
-            var blockRefined = refine(dbBlock);
-            $scope.blocks.push(blockRefined);
-        }
-        $scope.icon = "Objects loaded: " + data.length;
-    }).finally(function(){
-        $log.info('Get called');
-        $scope.icon += "!!!";
-    });
-    
-    
-    /*
-    for(var i = 0; i < 7; i++){
-        for(var j = 0; j < 7; j++){
-            $scope.blocks.push(getBlockInfo(i,j));
-        }
-    };
-    */
-    
-    $log.info('GridREST: ' + GridREST);
-  
+    loadBlocks($scope, GridREST);
     
     $scope.showAlert = function(aName) {
       alert = $mdDialog.alert()
@@ -56,7 +20,7 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
           .finally(function() {
             alert = undefined;
           });
-        $log.info('Alert called');
+        console.info('Alert called');
         
     };
     
@@ -64,10 +28,10 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
         // Appending dialog to document.body to cover sidenav in docs app
         if(block.enabled){
             confirm = $mdDialog.prompt()
-              .title("Who is " + block.id + "?")
+              .title(block.title)
               .textContent(block.description)
-              .placeholder("What's the value for " + block.id + "?")
-              .ariaLabel(block.id)
+              .placeholder(block.tooltip)
+              .ariaLabel(block.displayId)
               .ok('Okay!')
               .cancel('Cancel');
         
@@ -81,64 +45,60 @@ app.controller("gridController", function ($scope, $mdDialog, $log, $http, GridR
                 .finally(function(){
                             confirm = undefined;
                         });
-            $log.info('Show Prompt open');
+            console.info('Show Prompt open');
         }else{
-            $log.info('Show Prompt disabled');
+            console.info('Show Prompt disabled');
         }
       };
 
 });
 
+// business and model
+
+function loadBlocks(scope, GridREST){
+     for(var i = 0; i < 7; i++){
+        for(var j = 0; j < 7; j++){
+            scope.blocks.push(getDefaultBlockInfo(i,j));
+        }
+    };
+    
+    GridREST.get().success(function(data) {
+
+        for(index in data){
+            var dbBlock = data[index];
+            var blockVO = refine(dbBlock);
+            
+            var gridIndex = (7*dbBlock.i)+dbBlock.j;
+            
+            console.info('Changed value []' + gridIndex + ' <-> ' + dbBlock._id);
+            scope.blocks[gridIndex] = blockVO;
+            
+        }
+        scope.icon = "Total objects loaded: " + data.length;
+    }).finally(function(){
+        scope.icon += "!!!";
+    });
+    
+}
 function refine(dbBlock){
-    var id = getId(dbBlock.id);
-    dbBlock.id = id;
+    dbBlock.enabled |= getEnabled(dbBlock._id);
+    dbBlock.displayId = getDisplayId(dbBlock._id, dbBlock.enabled);
     
     return dbBlock;
 }
 
-// temporary business and model
 
-
-
-function getBlockInfo(i,j){
+function getDefaultBlockInfo(i,j){
     var block = new Object;
     var cellNr = getCellNr(i,j);
-    block.id = getId(cellNr);
-    block.description = getDescription(cellNr);
-    block.tooltip = getTooltip(cellNr);
-    block.value = getBlockValue(cellNr);
-    block.enabled = getEnabled(cellNr);
+    block.displayId = getDisplayId(cellNr, false);
+    block.enabled = false;
+    
+    block.title = getTitleDefault(cellNr);
+    block.description = getDescriptionDefault(cellNr);
+    block.tooltip = getTooltipDefault(cellNr, block.enabled);
+    
     return block;
-}
-
-function getCellNr(i,j){
-    if(i == 3 && j == 3){
-        return 0;
-    }
-    // TODO resolve correctly the numbers
-    return ((i)*7)+(j+1);
-}
-
-function getId(cellNr){
-    if(cellNr == 0){
-        return ":-)";
-    }
-    return "#"+cellNr;
-}
-
-function getTooltip(cellNr){
-    if(cellNr == 0){
-        return "It's you!";
-    }
-    return "Who is #" + cellNr + "?";
-}
-
-function getDescription(cellNr){
-    return "Qual'é il nome di TODO?";
-}
-
-function getBlockValue(cellNr){
-    return null;
 }
 
 function getEnabled(cellNr){
@@ -146,4 +106,40 @@ function getEnabled(cellNr){
         return false;
     }
     return true;
+}
+
+function getDisplayId(id, enabled){
+    if(id == 0){
+        return ":-)";
+    }
+    if(enabled){
+        return "#"+id;    
+    }
+    return "";
+}
+
+function getTitleDefault(){
+    return "title default";
+}
+
+function getTooltipDefault(cellNr, enabled){
+    if(cellNr == 0){
+        return "It's you!";
+    }
+    if(enabled){
+        return "tooltip default";    
+    }
+    return "";
+}
+
+function getDescriptionDefault(cellNr){
+    return "description default";
+}
+
+
+function getCellNr(i,j){
+    if(i == 3 && j == 3){
+        return 0;
+    }
+    return ((i)*7)+(j+1);
 }

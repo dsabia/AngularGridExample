@@ -32,7 +32,7 @@
         <div ng-repeat="block in blocks" class="block seventy" >
             
             <div class="blockInternal tooltip" >
-                <span ng-click="showPrompt(block)">{{block.value == null ? block.id : block.value}}</span>
+                <span ng-click="showPrompt(block)">{{block.value == null ? block.displayId : block.value}}</span>
                 <div class="tooltiptext">{{block.tooltip}}<br/>{{block.value}}</div>
             </div>
             

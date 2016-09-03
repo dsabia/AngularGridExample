@@ -7,8 +7,8 @@ var BlockSchema = new mongoose.Schema({
     tooltip: String,
     value: String,
     enabled: Boolean,
-    i: Number,
-    j: Number
+    x: Number,
+    y: Number
 });
 
 var Block = mongoose.model('Block', BlockSchema);
